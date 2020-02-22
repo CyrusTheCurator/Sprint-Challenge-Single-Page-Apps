@@ -6,6 +6,7 @@ import CharacterCard from "./CharacterCard";
 
 export default function CharacterList(props) {
   // TODO: Add useState to track data from useEffect
+  const searchResults = props.searchResults;
 
   useEffect(() => {
     const getCharacters = () => {
@@ -20,7 +21,6 @@ export default function CharacterList(props) {
         .get("https://rickandmortyapi.com/api/character/")
         .then(response => {
           props.setSearchResults(response.data.results);
-          debugger;
           console.log(`current vals should now be  ${response.data}`);
 
           console.log(`current vals are now ${props.searchResults}`);
@@ -47,7 +47,6 @@ export default function CharacterList(props) {
 
       {props.charactersToDisplay.map(element => {
         const cardLink = `character/${element.id}`;
-        const searchResults = props.searchResults;
         return (
           <div>
             <Route
@@ -63,20 +62,17 @@ export default function CharacterList(props) {
                 );
               }}
             />
-            <Route
-              path="/character/:id"
-              render={props => {
-                return (
-                  <CharacterCard
-                    searchResults={searchResults}
-                    match={props.match}
-                  />
-                );
-              }}
-            />
           </div>
         );
       })}
+      <Route
+        path="/character/:id"
+        render={props => {
+          return (
+            <CharacterCard searchResults={searchResults} match={props.match} />
+          );
+        }}
+      />
     </section>
   );
 }
