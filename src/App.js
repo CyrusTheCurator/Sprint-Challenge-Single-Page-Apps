@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
 import SearchForm from "./components/SearchForm";
 import CharacterList from "./components/CharacterList";

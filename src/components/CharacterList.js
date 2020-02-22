@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import SearchForm from "./SearchForm";
 
 export default function CharacterList(props) {
@@ -19,7 +19,8 @@ export default function CharacterList(props) {
         .get("https://rickandmortyapi.com/api/character/")
         .then(response => {
           props.setSearchResults(response.data.results);
-          console.log(`current vals should now be  ${response.data.results}`);
+          debugger;
+          console.log(`current vals should now be  ${response.data}`);
 
           console.log(`current vals are now ${props.searchResults}`);
         })
@@ -44,11 +45,36 @@ export default function CharacterList(props) {
       />
 
       {props.charactersToDisplay.map(element => {
+        const cardLink = `character/${element.id}`;
+
         return (
-          const cardLink = `/${}`
-          <Link to=`/home/${}`/>
           <div>
-            <h1>{element.name}</h1> <img src={element.image} />
+            <Route
+              exact
+              path="/"
+              render={props => {
+                return (
+                  <Link to={cardLink}>
+                    <div>
+                      <h1>{element.name}</h1> <img src={element.image} />
+                    </div>
+                  </Link>
+                );
+              }}
+            />
+            <Route
+              path="/character"
+              render={props => {
+                return (
+                  <Link to={cardLink}>
+                    <div>
+                      <h1>You clicked on {element.name}</h1>
+                      <img src={element.image} />
+                    </div>
+                  </Link>
+                );
+              }}
+            />
           </div>
         );
       })}
