@@ -10,20 +10,10 @@ export default function CharacterList(props) {
 
   useEffect(() => {
     const getCharacters = () => {
-      console.log(
-        `our initial vals are defaulted to ${props.charactersToDisplay.map(
-          element => {
-            return element.name;
-          }
-        )}`
-      );
       axios
         .get("https://rickandmortyapi.com/api/character/")
         .then(response => {
           props.setSearchResults(response.data.results);
-          console.log(`current vals should now be  ${response.data}`);
-
-          console.log(`current vals are now ${props.searchResults}`);
         })
         .catch(error => {
           console.error("Server Error", error);

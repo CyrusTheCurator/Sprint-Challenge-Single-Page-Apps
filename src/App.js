@@ -7,10 +7,7 @@ import Header from "./components/Header.js";
 import axios from "axios";
 
 export default function App() {
-  const [searchResults, setSearchResults] = useState([
-    { name: "me" },
-    { name: "some other guy" }
-  ]);
+  const [searchResults, setSearchResults] = useState([]);
   const [charactersToDisplay, setCharactersToDisplay] = useState(searchResults);
   return (
     <main>

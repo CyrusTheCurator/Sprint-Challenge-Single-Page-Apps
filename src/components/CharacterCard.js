@@ -14,6 +14,7 @@ export default function CharacterCard(props) {
     border: 3px solid green;
     padding: 10px;
     display: flex;
+    justify-content: space-around;
   `;
 
   return item ? (
@@ -21,11 +22,11 @@ export default function CharacterCard(props) {
       <Link to="/">Home</Link>
       <StyledDiv>
         <img src={item.image} />
-        <div>{item.name}</div>
-        <p>Status: </p>
+        <h3>{item.name}</h3>
+        <h3>Species: {item.species} </h3>
 
-        <p>Status: </p>
-        <p>Home Planet: </p>
+        <h3>Status: {item.status}</h3>
+        <h3>Home Planet: {item.origin.name} </h3>
       </StyledDiv>
     </>
   ) : (
