@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Link } from "react-router-dom";
 import SearchForm from "./SearchForm";
+import CharacterCard from "./CharacterCard";
 
 export default function CharacterList(props) {
   // TODO: Add useState to track data from useEffect
@@ -46,7 +47,7 @@ export default function CharacterList(props) {
 
       {props.charactersToDisplay.map(element => {
         const cardLink = `character/${element.id}`;
-
+        const searchResults = props.searchResults;
         return (
           <div>
             <Route
@@ -63,15 +64,13 @@ export default function CharacterList(props) {
               }}
             />
             <Route
-              path="/character"
+              path="/character/:id"
               render={props => {
                 return (
-                  <Link to={cardLink}>
-                    <div>
-                      <h1>You clicked on {element.name}</h1>
-                      <img src={element.image} />
-                    </div>
-                  </Link>
+                  <CharacterCard
+                    searchResults={searchResults}
+                    match={props.match}
+                  />
                 );
               }}
             />
