@@ -1,24 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function SearchForm() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+export default function SearchForm(props) {
+  const [localSearchTerm, setLocalSearchTerm] = useState("");
+  const testArr = [];
+
+  useEffect(() => {
+    console.log("Search ressults changed and now we're gonna do a thing");
+
+    const results = props.searchResults.filter(character => {
+      return character.name
+        .toLowerCase()
+        .includes(localSearchTerm.toLowerCase());
+    });
+
+    return props.setCharactersToDisplay(results);
+  }, [localSearchTerm]);
+
   const handleChange = event => {
-    setSearchTerm(event.target.value);
-    console.log(searchTerm);
+    setLocalSearchTerm(event.target.value);
+    console.log(localSearchTerm);
   };
   return (
     <section className="search-form">
       <form>
-        <label htmlFor="name">Search:</label>
+        <label htmlFor="searchTerm">Search:</label>
         <input
-          id="name"
+          id="searchTerm"
           type="text"
           name="textfield"
           placeholder="Search"
-          value={searchTerm}
+          value={localSearchTerm}
           onChange={handleChange}
         />
+        {/* <input type="submit" value="Search" onSubmit={newAPICall} /> */}
       </form>
     </section>
   );

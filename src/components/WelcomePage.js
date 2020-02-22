@@ -9,7 +9,8 @@ export default function WelcomePage() {
           className="main-img"
           // src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
           alt="rick"
-        />
+        />{" "}
+        Wub, Lub, Dub
       </header>
     </section>
   );
